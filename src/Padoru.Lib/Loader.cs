@@ -7,7 +7,7 @@ namespace Padoru.Lib
     public class Loader : LoaderBase<Config>
     {
         [PluginConfig]
-        public Config Config;
+        public new Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
         [PluginEntryPoint("Padoru.Lib", "2022.1223.0", "Библиотека для плагинов", "NekoDev Team")]
