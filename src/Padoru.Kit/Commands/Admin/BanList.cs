@@ -1,7 +1,9 @@
 ﻿using System;
 using CommandSystem;
 using NorthwoodLib.Pools;
-using Padoru.API;
+using PluginAPI.Core;
+using UnityEngine;
+using Color = Padoru.API.Color;
 
 namespace Padoru.Kit.Commands.Admin
 {
@@ -16,7 +18,7 @@ namespace Padoru.Kit.Commands.Admin
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            const int take = 10;
+            const int take = 7;
 
             var banList = BanHandler.GetBans(BanHandler.BanType.UserId);
 
@@ -29,58 +31,67 @@ namespace Padoru.Kit.Commands.Admin
             var sb = StringBuilderPool.Shared.Rent();
 
             sb.AppendLine($"<color={Color.Blue}>Список забаненных игроков ({banList.Count}):</color>");
-            sb.AppendLine("<i>для постраничной навигации используйте <b>bans [page]</b></i>\n");
+            sb.AppendLine("Для навигации используйте <b>bans [страница]</b>\n");
 
             var skip = arguments.Count > 0 && int.TryParse(arguments.At(0), out var page)
-                ? (page - 1) * take
+                ? Mathf.Clamp((page - 1) * take, 0, banList.Count - take)
                 : 0;
 
-            banList.Reverse();
-
-            for (var i = skip; i < take; i++)
+            // bruh I'm tired asf
+            for (var i = banList.Count - skip - 1; i >= banList.Count - skip - take; i--)
             {
                 var ban = banList[i];
-                var number = banList.Count - i;
 
                 var issuedAt = new DateTime(ban.IssuanceTime);
                 var expiresAt = new DateTime(ban.Expires);
 
+                var issuerId = GetIssuerId(ban.Issuer);
                 var duration = GetDuration(issuedAt, expiresAt);
 
                 sb.AppendLine(
-                    $"<b>{number} {issuedAt:dd.MM.yy HH:mm:ss}.</b> <b>{ban.Issuer}</b> забанил(-а) <b>{ban.Id}</b> на <b>{duration}</b>: {ban.Reason}"
+                    $"[{i}. {issuedAt:dd.MM.yy HH:mm:ss}] <b>{issuerId}</b> забанил <b>{ban.Id}</b> на <b>{duration}</b>: {ban.Reason}"
                 );
             }
 
-            response = sb.ToString();
+            response = StringBuilderPool.Shared.ToStringReturn(sb);
             return true;
+        }
+
+        /// <summary>
+        /// Возвращает в строке содержимое в скобках или строку полностью, если скобок нет
+        /// </summary>
+        private static string GetIssuerId(string issuer)
+        {
+            var index = issuer.IndexOf('(');
+
+            return index == -1
+                ? issuer
+                : issuer.Substring(index + 1, issuer.Length - index - 2);
         }
 
         /// <summary>
         /// Возвращает длительность бана в формате "5 мин" / "1 час" / "1 дн" / "1 мес" / "1 год"
         /// </summary>
-        /// <param name="issuedAt"></param>
-        /// <param name="expiresAt"></param>
-        /// <returns></returns>
         private static string GetDuration(DateTime issuedAt, DateTime expiresAt)
         {
             var duration = expiresAt - issuedAt;
 
             if (duration.TotalMinutes < 60)
             {
-                return $"{duration.Minutes} мин";
+                return $"{duration.Minutes}m";
             }
 
             if (duration.TotalHours < 24)
             {
-                return $"{duration.Hours} час";
+                return $"{duration.Hours}h";
             }
 
             return duration.TotalDays switch
             {
-                < 30 => $"{duration.Days} дн",
-                < 365 => $"{duration.Days / 30} мес",
-                _ => $"{duration.Days / 365} лет"
+                < 7 => $"{duration.Days}W",
+                < 30 => $"{duration.Days}D",
+                < 365 => $"{duration.Days / 30}M",
+                _ => $"{duration.Days / 365}Y"
             };
         }
     }
