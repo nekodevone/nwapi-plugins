@@ -1,0 +1,58 @@
+<Project>
+  <PropertyGroup Label="General">
+      <Company>NekoDev Team</Company>
+      <Copyright>Copyright © $(Company) 2020 - $([System.DateTime]::Now.ToString("yyyy"))</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Platform">
+      <LangVersion>9</LangVersion>
+      <PlatformTarget>x64</PlatformTarget>
+      <TargetFramework>net472</TargetFramework>
+      <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build">
+      <FileAlignment>512</FileAlignment>
+      <OutputPath>$(SL_REFERENCES)build</OutputPath>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+      <ErrorReport>prompt</ErrorReport>
+      <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Debug Overrides" Condition="$(Configuration) == '' or $(Configuration) == 'Debug'">
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
+      <DebugSymbols>true</DebugSymbols>
+      <DebugType>full</DebugType>
+      <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Release Overrides" Condition="$(Configuration) == 'Release'">
+      <DefineConstants>TRACE</DefineConstants>
+      <DebugType>pdbonly</DebugType>
+      <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup Label="Packages">
+      <PackageReference Include="Lib.Harmony" Version="2.2.2"/>
+      <PackageReference Include="YamlDotNet" Version="11.0.1"/>
+  </ItemGroup>
+
+  <ItemGroup Label="SCP:SL References">
+      <Reference Private="false" Include="Assembly-CSharp" HintPath="$(SL_REFERENCES)\references\Assembly-CSharp.dll"/>
+      <Reference Private="false" Include="Assembly-CSharp-firstpass" HintPath="$(SL_REFERENCES)\references\Assembly-CSharp-firstpass.dll"/>
+      <Reference Private="false" Include="BouncyCastle.Crypto" HintPath="$(SL_REFERENCES)\references\BouncyCastle.Crypto.dll"/>
+      <Reference Private="false" Include="CloudflareSolverRe" HintPath="$(SL_REFERENCES)\references\CloudflareSolverRe.dll"/>
+      <Reference Private="false" Include="CommandSystem.Core" HintPath="$(SL_REFERENCES)\references\CommandSystem.Core.dll"/>
+      <Reference Private="false" Include="DissonanceVoip" HintPath="$(SL_REFERENCES)\references\DissonanceVoip.dll"/>
+      <Reference Private="false" Include="Mirror" HintPath="$(SL_REFERENCES)\references\Mirror.dll"/>
+      <Reference Private="false" Include="Mirror.Components" HintPath="$(SL_REFERENCES)\references\Mirror.Components.dll"/>
+      <Reference Private="false" Include="NorthwoodLib" HintPath="$(SL_REFERENCES)\references\NorthwoodLib.dll"/>
+      <Reference Private="false" Include="Unity.Mathematics" HintPath="$(SL_REFERENCES)\references\Unity.Mathematics.dll"/>
+      <Reference Private="false" Include="UnityEngine" HintPath="$(SL_REFERENCES)\references\UnityEngine.dll"/>
+      <Reference Private="false" Include="UnityEngine.CoreModule" HintPath="$(SL_REFERENCES)\references\UnityEngine.CoreModule.dll"/>
+      <Reference Private="false" Include="UnityEngine.DirectorModule" HintPath="$(SL_REFERENCES)\references\UnityEngine.DirectorModule.dll"/>
+      <Reference Private="false" Include="UnityEngine.PhysicsModule" HintPath="$(SL_REFERENCES)\references\UnityEngine.PhysicsModule.dll"/>
+      <Reference Private="false" Include="UnityEngine.StreamingModule" HintPath="$(SL_REFERENCES)\references\UnityEngine.StreamingModule.dll"/>
+  </ItemGroup>
+</Project>
