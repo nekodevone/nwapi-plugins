@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project">
+        <ProjectGuid>{6CE270D5-0757-4408-9F37-7D6E6C868587}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Padoru.Logger</RootNamespace>
+        <AssemblyName>Padoru.Logger</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Padoru.Lib\Padoru.Lib.csproj" />
+    </ItemGroup>
+</Project>
