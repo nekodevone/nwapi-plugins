@@ -1,9 +1,8 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using PluginAPI.Core;
 using PluginAPI.Events;
 
-namespace Padoru.Lib.API.Features.Plugins
+namespace Padoru.API.Features.Plugins
 {
     /// <summary>
     /// Базовый класс плагина
@@ -24,16 +23,16 @@ namespace Padoru.Lib.API.Features.Plugins
         /// <summary>
         /// Метод, вызываемый из загрузчика для инициализации плагина
         /// </summary>
-        public void Load(ILoader<TConfig> loader)
+        public void Load(LoaderBase<TConfig> loaderBase)
         {
             var assembly = Assembly.GetCallingAssembly();
 
             Assembly = assembly;
-            Config = loader.Config;
+            Config = loaderBase.Config;
 
             foreach (var type in assembly.FindInterfaces(typeof(IEventHandler)))
             {
-                EventManager.RegisterEvents(loader, type);
+                EventManager.RegisterEvents(loaderBase, type);
             }
 
             try

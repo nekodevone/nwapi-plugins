@@ -1,14 +1,15 @@
-﻿namespace Padoru.Lib.API.Features.Plugins
+﻿namespace Padoru.API.Features.Plugins
 {
     /// <summary>
     /// Интерфейс загрузчика плагина 
     /// </summary>
     /// <typeparam name="TConfig"></typeparam>
-    public interface ILoader<TConfig> : IConfig
+    public abstract class LoaderBase<TConfig> : IConfig
     {
         /// <summary>
         /// Конфигурация плагина
         /// </summary>
-        public TConfig Config { get; set; }
+        // Bruh 
+        public TConfig Config;
     }
 }

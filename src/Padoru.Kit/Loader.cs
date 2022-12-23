@@ -1,13 +1,13 @@
-﻿using Padoru.Lib.API.Features.Plugins;
+﻿using Padoru.API.Features.Plugins;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 
 namespace Padoru.Kit
 {
-    public class Loader : ILoader<Config>
+    public class Loader : LoaderBase<Config>
     {
-        [field: PluginConfig]
-        public Config Config { get; set; }
+        [PluginConfig]
+        public Config Config;
         
         [PluginPriority(LoadPriority.High)]
         [PluginEntryPoint("Padoru.Kit", "2022.1223.0", "Общие утилиты для наших серверов", "NekoDev Team")]

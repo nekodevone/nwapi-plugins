@@ -1,4 +1,4 @@
-﻿using Padoru.Lib.API.Features.Plugins;
+﻿using Padoru.API.Features.Plugins;
 
 namespace Padoru.Kit
 {

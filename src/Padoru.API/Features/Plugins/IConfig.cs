@@ -1,4 +1,4 @@
-﻿namespace Padoru.Lib.API.Features.Plugins
+﻿namespace Padoru.API.Features.Plugins
 {
     /// <summary>
     /// Интерфейс конфигурации плагина

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Padoru.Lib.API
+namespace Padoru.API.Features
 {
     public static class Http
     {
