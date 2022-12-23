@@ -4,7 +4,7 @@ using PluginAPI.Enums;
 
 namespace Padoru.Lib
 {
-    public class Loader : ILoader
+    public sealed class Loader : ILoader
     {
         [PluginConfig]
         public Config Config;

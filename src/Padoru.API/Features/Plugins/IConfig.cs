@@ -5,5 +5,6 @@
     /// </summary>
     public interface IConfig
     {
+        bool IsEnabled { get; set; }
     }
 }
