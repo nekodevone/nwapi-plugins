@@ -7,6 +7,8 @@ namespace Padoru.Kit
     {
         public static Plugin Instance { get; } = new();
 
+        public static Config Configs => Instance.Config;
+
         public override void OnLoaded()
         {
             Log.Info("Hurray, PadoruKit is loaded!");

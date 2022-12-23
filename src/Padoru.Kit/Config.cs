@@ -1,9 +1,11 @@
-﻿using Padoru.API.Features.Plugins;
+﻿using System.ComponentModel;
+using Padoru.API.Features.Plugins;
 
 namespace Padoru.Kit
 {
     public class Config : IConfig
     {
-        public string Hello { get; set; } = "World";
+        [Description("Убрать SCP-2536")]
+        public bool Remove2536 { get; set; } = false;
     }
 }
