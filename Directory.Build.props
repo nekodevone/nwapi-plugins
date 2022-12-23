@@ -43,9 +43,7 @@
       <Reference Private="false" Include="Assembly-CSharp" HintPath="$(SL_REFERENCES)\Assembly-CSharp.dll"/>
       <Reference Private="false" Include="Assembly-CSharp-firstpass" HintPath="$(SL_REFERENCES)\Assembly-CSharp-firstpass.dll"/>
       <Reference Private="false" Include="BouncyCastle.Crypto" HintPath="$(SL_REFERENCES)\BouncyCastle.Crypto.dll"/>
-      <Reference Private="false" Include="CloudflareSolverRe" HintPath="$(SL_REFERENCES)\CloudflareSolverRe.dll"/>
       <Reference Private="false" Include="CommandSystem.Core" HintPath="$(SL_REFERENCES)\CommandSystem.Core.dll"/>
-      <Reference Private="false" Include="DissonanceVoip" HintPath="$(SL_REFERENCES)\DissonanceVoip.dll"/>
       <Reference Private="false" Include="Mirror" HintPath="$(SL_REFERENCES)\Mirror.dll"/>
       <Reference Private="false" Include="Mirror.Components" HintPath="$(SL_REFERENCES)\Mirror.Components.dll"/>
       <Reference Private="false" Include="NorthwoodLib" HintPath="$(SL_REFERENCES)\NorthwoodLib.dll"/>
