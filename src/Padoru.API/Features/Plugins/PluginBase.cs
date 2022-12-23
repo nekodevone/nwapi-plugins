@@ -23,12 +23,12 @@ namespace Padoru.API.Features.Plugins
         /// <summary>
         /// Метод, вызываемый из загрузчика для инициализации плагина
         /// </summary>
-        public void Load(LoaderBase<TConfig> loader)
+        public void Load(ILoader loader, TConfig config)
         {
-            var assembly = Assembly.GetCallingAssembly();
+            var assembly = loader.GetType().Assembly;
 
             Assembly = assembly;
-            Config = loader.Config;
+            Config = config;
 
             EventManager.RegisterAllEvents(loader);
 

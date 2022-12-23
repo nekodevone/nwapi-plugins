@@ -4,16 +4,16 @@ using PluginAPI.Enums;
 
 namespace Padoru.Kit
 {
-    public class Loader : LoaderBase<Config>
+    public class Loader : ILoader
     {
         [PluginConfig]
-        public new Config Config;
+        public Config Config;
         
         [PluginPriority(LoadPriority.High)]
         [PluginEntryPoint("Padoru.Kit", "2022.1223.0", "Общие утилиты для наших серверов", "NekoDev Team")]
         public void Load()
         {
-            Plugin.Instance.Load(this);
+            Plugin.Instance.Load(this, Config);
         }
     }
 }
