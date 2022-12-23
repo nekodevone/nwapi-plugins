@@ -65,7 +65,7 @@ namespace Padoru.Logger
                             var content = JsonSerializer.ToJsonString(new WebhookParams($"{GetCurrentTime()} - {cropped}"));
 
                             Http.Client.PostAsync(Plugin.Instance.Config.WebhookUrl,
-                                new StringContent(content, Encoding.UTF8, "application/json"));
+                                new StringContent(content, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
 
                             message = message.Substring(Mathf.Clamp(1901, 0, message.Length));
                         }
