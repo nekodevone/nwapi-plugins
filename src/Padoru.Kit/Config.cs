@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using Padoru.API.Features.Plugins;
-using UnityEngine;
+using Padoru.API.Structs;
 
 namespace Padoru.Kit
 {
@@ -13,6 +13,6 @@ namespace Padoru.Kit
         public bool Remove2536 { get; set; } = false;
 
         [Description("Расположение башни туториалов")]
-        public Vector3 TowerPosition { get; set; } = new(130.335f, 994f, 20.113f);
+        public SerializedVector3 TowerPosition { get; set; } = new(130.335f, 994f, 20.113f);
     }
 }

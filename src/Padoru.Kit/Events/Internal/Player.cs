@@ -42,7 +42,7 @@ namespace Padoru.Kit.Events.Internal
             }
 
             // Не знаю присутствует этот "баг" всё ещё или нет
-            Timing.CallDelayed(1f, () =>
+            Timing.CallDelayed(0.3f, () =>
             {
                 // Админ быстро прокликал форс класс
                 if (player.Role != role)
@@ -51,8 +51,8 @@ namespace Padoru.Kit.Events.Internal
                 }
 
                 // Выдадим очень много HP вместо годмода. Эффект +/- одинаковый, только годмод в 12.0 может не убраться после форскласса
-                player.Health = float.MaxValue;
-                player.Position = Plugin.Configs.TowerPosition;
+                player.Health = ushort.MaxValue;
+                player.Position = Plugin.Configs.TowerPosition.Get;
             });
         }
     }
