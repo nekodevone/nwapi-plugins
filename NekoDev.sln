@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padoru.Kit", "src\Padoru.Ki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padoru.API", "src\Padoru.API\Padoru.API.csproj", "{976FFE45-CBBA-42A2-AED2-0EFEA6B52A12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Padoru.Donate", "src\Padoru.Donate\Padoru.Donate.csproj", "{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{976FFE45-CBBA-42A2-AED2-0EFEA6B52A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{976FFE45-CBBA-42A2-AED2-0EFEA6B52A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{976FFE45-CBBA-42A2-AED2-0EFEA6B52A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project">
+        <ProjectGuid>{AEB9CDD0-5DE7-4E03-8DE9-0267542E6643}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Padoru.Donate</RootNamespace>
+        <AssemblyName>Padoru.Donate</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="System" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Padoru.API\Padoru.API.csproj" />
+      <ProjectReference Include="..\Padoru.Lib\Padoru.Lib.csproj" />
+    </ItemGroup>
+</Project>
