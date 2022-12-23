@@ -23,17 +23,14 @@ namespace Padoru.API.Features.Plugins
         /// <summary>
         /// Метод, вызываемый из загрузчика для инициализации плагина
         /// </summary>
-        public void Load(LoaderBase<TConfig> loaderBase)
+        public void Load(LoaderBase<TConfig> loader)
         {
             var assembly = Assembly.GetCallingAssembly();
 
             Assembly = assembly;
-            Config = loaderBase.Config;
+            Config = loader.Config;
 
-            foreach (var type in assembly.FindInterfaces(typeof(IEventHandler)))
-            {
-                EventManager.RegisterEvents(loaderBase, type);
-            }
+            EventManager.RegisterAllEvents(loader);
 
             try
             {
