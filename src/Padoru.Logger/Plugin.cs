@@ -11,7 +11,7 @@ namespace Padoru.Logger
         
         private Sender _sender;
 
-        public override void OnLoaded()
+        protected override void OnLoaded()
         {
             if (string.IsNullOrEmpty(Config.WebhookUrl))
             {
