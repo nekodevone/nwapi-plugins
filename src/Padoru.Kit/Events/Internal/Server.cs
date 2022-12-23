@@ -6,7 +6,7 @@ namespace Padoru.Kit.Events.Internal
 {
     public class Server : IEventHandler
     {
-        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        [PluginEvent(ServerEventType.RoundStart)]
         public void Remove2536OnWaitingForPlayers()
         {
             if (!Plugin.Configs.Remove2536)
