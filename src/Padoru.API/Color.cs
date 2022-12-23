@@ -14,5 +14,10 @@
         /// Красный
         /// </summary>
         public const string Red = "#f23c34";
+
+        /// <summary>
+        /// Зелёный
+        /// </summary>
+        public const string Green = "#1ed760";
     }
 }
