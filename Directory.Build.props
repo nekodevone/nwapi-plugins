@@ -13,7 +13,7 @@
 
   <PropertyGroup Label="Build">
       <FileAlignment>512</FileAlignment>
-      <OutputPath>$(SL_REFERENCES)build</OutputPath>
+      <OutputPath>$(MSBuildThisFileDirectory)build</OutputPath>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
       <ErrorReport>prompt</ErrorReport>
