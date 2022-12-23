@@ -1,4 +1,6 @@
-﻿using Padoru.API.Features.Plugins;
+﻿using MEC;
+using Padoru.API.Features.Plugins;
+using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
@@ -29,6 +31,29 @@ namespace Padoru.Kit.Events.Internal
                 $"Player [{issuer.PlayerId}]  {issuer.Nickname} ({issuer.UserId}) reported [{target.PlayerId}]  {target.Nickname} ({target.UserId}): {reason}");
 
             Plugin.Reports.Send(issuer, target, reason);
+        }
+
+        [PluginEvent(ServerEventType.PlayerSpawn)]
+        public void FixTutorialOnPlayerSpawn(PlayerAPI player, RoleTypeId role)
+        {
+            if (role is not RoleTypeId.Tutorial)
+            {
+                return;
+            }
+
+            // Не знаю присутствует этот "баг" всё ещё или нет
+            Timing.CallDelayed(0.3f, () =>
+            {
+                // Админ быстро прокликал форс класс
+                if (player.Role != role)
+                {
+                    return;
+                }
+
+                // Выдадим очень много HP вместо годмода. Эффект +/- одинаковый, только годмод в 12.0 может не убраться после форскласса
+                player.Health = ushort.MaxValue;
+                player.Position = Plugin.Configs.TowerPosition.Get;
+            });
         }
     }
 }

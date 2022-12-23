@@ -6,7 +6,7 @@ namespace Padoru.Kit.Events.Internal
 {
     public class Server : IEventHandler
     {
-        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        [PluginEvent(ServerEventType.RoundStart)]
         public void Remove2536OnWaitingForPlayers()
         {
             if (!Plugin.Configs.Remove2536)
@@ -15,6 +15,12 @@ namespace Padoru.Kit.Events.Internal
             }
 
             Christmas.Scp2536.Scp2536Controller.Singleton.enabled = false;
+        }
+
+        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        public void ClearReportsOnWaitingForPlayer()
+        {
+            Plugin.Reports.Clear();
         }
     }
 }

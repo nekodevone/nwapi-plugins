@@ -16,6 +16,12 @@ namespace Padoru.Kit.Commands.Admin
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            if (Plugin.Reports.List.IsEmpty())
+            {
+                response = $"<color={Color.Green}>Всё отлично, репортов нет!</color>";
+                return true;
+            }
+
             var sb = StringBuilderPool.Shared.Rent();
             var i = 0;
 
