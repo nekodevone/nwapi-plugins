@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup Label="Project">
+        <ProjectGuid>{976FFE45-CBBA-42A2-AED2-0EFEA6B52A12}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Padoru.API</RootNamespace>
+        <AssemblyName>Padoru.API</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Net.Http" />
+    </ItemGroup>
+</Project>

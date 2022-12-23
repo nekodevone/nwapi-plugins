@@ -10,4 +10,8 @@
         <Reference Include="System" />
         <Reference Include="System.Net.Http" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Padoru.API\Padoru.API.csproj" />
+    </ItemGroup>
 </Project>

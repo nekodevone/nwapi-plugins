@@ -7,13 +7,13 @@
   <PropertyGroup Label="Platform">
       <LangVersion>9</LangVersion>
       <PlatformTarget>x64</PlatformTarget>
-      <TargetFramework>net472</TargetFramework>
-      <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+      <TargetFramework>net48</TargetFramework>
+      <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">
       <FileAlignment>512</FileAlignment>
-      <OutputPath>$(SL_REFERENCES)build</OutputPath>
+      <OutputPath>$(MSBuildThisFileDirectory)build</OutputPath>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
       <ErrorReport>prompt</ErrorReport>
@@ -36,6 +36,7 @@
   <ItemGroup Label="Packages">
       <PackageReference Include="Lib.Harmony" Version="2.2.2"/>
       <PackageReference Include="YamlDotNet" Version="11.0.1"/>
+      <PackageReference Include="Northwood.PluginAPI" Version="12.0.0-rc.5"/>
   </ItemGroup>
 
   <ItemGroup Label="SCP:SL References">
