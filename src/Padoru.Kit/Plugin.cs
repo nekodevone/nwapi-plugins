@@ -1,15 +1,18 @@
 ﻿using Padoru.API.Features.Plugins;
+using Padoru.Kit.API.Features.Reports;
 using PluginAPI.Core;
 
 namespace Padoru.Kit
 {
-    public class Plugin : PluginBase<Config>
+    public sealed class Plugin : PluginBase<Config>
     {
         public static Plugin Instance { get; } = new();
 
         public static Config Configs => Instance.Config;
 
-        public override void OnLoaded()
+        public static ReportsController Reports { get; } = new();
+
+        protected override void OnLoaded()
         {
             Log.Info("Hurray, PadoruKit is loaded!");
         }

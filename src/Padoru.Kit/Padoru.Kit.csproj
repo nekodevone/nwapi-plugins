@@ -13,8 +13,4 @@
     <ItemGroup>
       <ProjectReference Include="..\Padoru.Lib\Padoru.Lib.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Patches" />
-    </ItemGroup>
 </Project>

@@ -16,7 +16,12 @@ namespace Padoru.API.Features.Plugins
         public Assembly Assembly { get; private set; }
 
         /// <summary>
-        /// Конфигурация плагина
+        /// <see cref="ILoader"/> плагина
+        /// </summary>
+        public ILoader Loader { get; private set; }
+
+        /// <summary>
+        /// <see cref="IConfig"/> плагина
         /// </summary>
         public TConfig Config { get; private set; }
 
@@ -28,24 +33,47 @@ namespace Padoru.API.Features.Plugins
             var assembly = loader.GetType().Assembly;
 
             Assembly = assembly;
+            Loader = loader;
             Config = config;
 
-            EventManager.RegisterAllEvents(loader);
+            if (!Config.IsEnabled)
+            {
+                Log.Info($"Plugin {assembly.GetName().Name} has been disabled");
+                return;
+            }
 
             try
             {
                 OnLoaded();
+                OnRegisteringEvents();
             }
             catch
             {
                 Log.Error($"Can't load plugin {assembly.GetName().Name}");
+                OnUnregisteringEvents();
                 throw;
             }
         }
 
         /// <summary>
+        /// Метод, вызываемый для регистрации событий
+        /// </summary>
+        protected virtual void OnRegisteringEvents()
+        {
+            EventManager.RegisterAllEvents(Loader);
+        }
+
+        /// <summary>
+        /// Метод, вызываемый для отмены регистрации событий
+        /// </summary>
+        protected virtual void OnUnregisteringEvents()
+        {
+            EventManager.UnregisterAllEvents(Loader);
+        }
+
+        /// <summary>
         /// Метод, вызываемый при инициализации плагина
         /// </summary>
-        public abstract void OnLoaded();
+        protected abstract void OnLoaded();
     }
 }
