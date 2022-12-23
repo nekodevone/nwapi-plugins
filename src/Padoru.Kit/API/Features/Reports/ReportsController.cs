@@ -44,5 +44,13 @@ namespace Padoru.Kit.API.Features.Reports
 
             ListPool<Player>.Shared.Return(admins);
         }
+
+        /// <summary>
+        /// Очищает список репортов
+        /// </summary>
+        public void Clear()
+        {
+            List.Clear();
+        }
     }
 }

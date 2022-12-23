@@ -16,5 +16,11 @@ namespace Padoru.Kit.Events.Internal
 
             Christmas.Scp2536.Scp2536Controller.Singleton.enabled = false;
         }
+
+        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        public void ClearReportsOnWaitingForPlayer()
+        {
+            Plugin.Reports.Clear();
+        }
     }
 }
