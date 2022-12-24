@@ -73,7 +73,7 @@ namespace Padoru.Logger
                 }
                 catch (Exception ex)
                 {
-                    Log.Warning($"Что топ пошло не так, попробуем через 5 секунд\n{ex}");
+                    Log.Warning($"Что то пошло не так, попробуем через 5 секунд\n{ex}");
                     Thread.Sleep(5000);
                 }
 
