@@ -92,6 +92,13 @@ namespace Padoru.Logger.Events.Internal
             Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} попал в карманное измерение.");
         }
 
+        [PluginEvent(ServerEventType.PlayerExitPocketDimension)]
+        public void OnPlayerExitPocketDimension(PlayerAPI player, bool isSuccessful)
+        {
+            Plugin.Sender.AddToQuene(
+                $"Игрок {player.GetInfo()} {(isSuccessful ? "выбрался из ки" : "выбрал не правильных выход из ки и умер")}.");
+        }
+
         [PluginEvent(ServerEventType.PlayerChangeRole)]
         public void OnPlayerChangeRole(PlayerAPI player, PlayerRoleBase oldRole, RoleTypeId newRole,
             RoleChangeReason reason)
