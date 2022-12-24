@@ -18,9 +18,15 @@ namespace Padoru.Kit.Events.Internal
         }
 
         [PluginEvent(ServerEventType.WaitingForPlayers)]
-        public void ClearReportsOnWaitingForPlayer()
+        public void ClearReportsOnWaitingForPlayers()
         {
             Plugin.Reports.Clear();
+        }
+        
+        [PluginEvent(ServerEventType.WaitingForPlayers)]
+        public void ClearJailOnWaitingForPlayers()
+        {
+            Plugin.Jail.Clear();
         }
     }
 }
