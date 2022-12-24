@@ -12,7 +12,7 @@ namespace Padoru.Logger.Extensions
         /// <returns></returns>
         public static string GetInfo(this PlayerAPI player)
         {
-            return $"{player.PlayerId} - {player.Nickname} ({player.UserId})[{player.Role}]";
+            return $"**{player.PlayerId} - {player.Nickname} ({player.UserId})[{player.Role}]**";
         }
 
         /// <summary>
