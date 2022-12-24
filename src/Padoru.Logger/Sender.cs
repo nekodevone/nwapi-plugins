@@ -32,7 +32,7 @@ namespace Padoru.Logger
         /// <param name="content">Сообщение</param>
         public void AddToQuene(string content)
         {
-            Queue.Enqueue(content);
+            Queue.Enqueue($"{GetCurrentTime()} - {content}");
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Padoru.Logger
                         while (message.Length > 0)
                         {
                             var cropped = message.Substring(0, Mathf.Clamp(message.Length, 0, 1900));
-                            var content = JsonSerializer.ToJsonString(new WebhookParams($"{GetCurrentTime()} - {cropped}"));
+                            var content = JsonSerializer.ToJsonString(new WebhookParams(cropped));
 
                             Http.Client.PostAsync(Plugin.Instance.Config.WebhookUrl,
                                 new StringContent(content, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
