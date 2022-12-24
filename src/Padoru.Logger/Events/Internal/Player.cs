@@ -136,7 +136,7 @@ namespace Padoru.Logger.Events.Internal
             }
 
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()} {(isSuccessful ? "выбрался из ки" : "выбрал не правильных выход из ки и умер")}.");
+                $"Игрок {player.GetInfo()} {(isSuccessful ? "выбрался из ки" : "выбрал не правильный выход из ки и умер")}.");
         }
 
         [PluginEvent(ServerEventType.PlayerChangeRole)]

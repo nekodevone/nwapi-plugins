@@ -18,7 +18,7 @@ namespace Padoru.Logger.Events.Internal
             }
             
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()} {(activate ? "использовал сталк" : "вышел из сталка")}");
+                $"Игрок {player.GetInfo()} {(activate ? "использовал сталк" : "вышел из сталка")}.");
         }
     }
 }
