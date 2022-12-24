@@ -45,8 +45,11 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
-            Plugin.Sender.AddToQuene(
-                $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от игрока {attacker.GetInfo()}.");
+            if (target.GetTeam() == attacker.GetTeam())
+            {
+                Plugin.Sender.AddToQuene(
+                    $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от игрока {attacker.GetInfo()}.");
+            }
         }
 
         [PluginEvent(ServerEventType.PlayerBanned)]
