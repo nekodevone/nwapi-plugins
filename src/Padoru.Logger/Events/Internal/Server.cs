@@ -45,7 +45,7 @@ namespace Padoru.Logger.Events.Internal
             }
 
             Plugin.Sender.AddToQuene(
-                $"Администратор {PlayerAPI.Get(sender.SenderId).GetInfo()} использовал команду {command} {arguments.Join(delimiter: string.Empty)}");
+                $"Администратор {PlayerAPI.Get(sender.SenderId).GetInfo()} использовал команду {command} {arguments.Join(delimiter: " ")}");
         }
     }
 }
