@@ -45,10 +45,10 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
-            if (target.GetTeam() == attacker.GetTeam())
+            if (attackerDamageHandler.IsFriendlyFire)
             {
                 Plugin.Sender.AddToQuene(
-                    $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от игрока {attacker.GetInfo()}.");
+                    $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от союзника {attacker.GetInfo()}.");
             }
         }
 
