@@ -21,13 +21,13 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.PlayerJoined)]
         public void OnPlayerJoined(PlayerAPI player)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) присоединился к серверу.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} присоединился к серверу.");
         }
 
         [PluginEvent(ServerEventType.PlayerLeft)]
         public void OnPlayerLeft(PlayerAPI player)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) вышел с сервера.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} вышел с сервера.");
         }
 
         [PluginEvent(ServerEventType.PlayerDamage)]
@@ -63,40 +63,40 @@ namespace Padoru.Logger.Events.Internal
             var expirationTime = DateTime.Now.AddSeconds(duration);
 
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()}) был заблокирован администратором {sender.Nickname}({sender.SenderId})\nПричина - {reason}\nДата разбана - {expirationTime}");
+                $"Игрок {player.GetInfo()} был заблокирован администратором {sender.Nickname}({sender.SenderId})\nПричина - {reason}\nДата разбана - {expirationTime}");
         }
 
         [PluginEvent(ServerEventType.PlayerDropItem)]
         public void OnPlayerDropItem(PlayerAPI player, ItemBase item)
         {
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()}) выбросил предмет {item.ItemTypeId}.");
+                $"Игрок {player.GetInfo()} выбросил предмет {item.ItemTypeId}.");
         }
 
         [PluginEvent(ServerEventType.PlayerSearchedPickup)]
         public void OnPlayerSearchedPickup(PlayerAPI player, ItemPickupBase pickup)
         {
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()}) подобрал предмет {pickup.NetworkInfo.ItemId}.");
+                $"Игрок {player.GetInfo()} подобрал предмет {pickup.NetworkInfo.ItemId}.");
         }
 
         [PluginEvent(ServerEventType.PlayerEscape)]
         public void OnPlayerEscape(PlayerAPI player, RoleTypeId newRoleType)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) сбежал и стал {newRoleType}.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} сбежал и стал {newRoleType}.");
         }
 
         [PluginEvent(ServerEventType.PlayerEnterPocketDimension)]
         public void OnPlayerEnterPocketDimension(PlayerAPI player)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) попал в карманное измерение.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} попал в карманное измерение.");
         }
 
         [PluginEvent(ServerEventType.PlayerChangeRole)]
         public void OnPlayerChangeRole(PlayerAPI player, PlayerRoleBase oldRole, RoleTypeId newRole,
             RoleChangeReason reason)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) теперь {newRole}({reason}).");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} теперь {newRole}({reason}).");
         }
 
         [PluginEvent(ServerEventType.PlayerDeath)]
@@ -107,20 +107,20 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) был убит {attacker.GetInfo()}.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} был убит {attacker.GetInfo()}.");
         }
 
         [PluginEvent(ServerEventType.PlayerThrowProjectile)]
         public void OnPlayerThrowProjectile(PlayerAPI player, ThrowableItem item, float forceAmount,
             float upwardsFactor, Vector3 torque, Vector3 velocity)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) бросил {item.ItemTypeId}.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} бросил {item.ItemTypeId}.");
         }
 
         [PluginEvent(ServerEventType.Scp939CreateAmnesticCloud)]
         public void OnScp939CreateAmnesticCloud(PlayerAPI player)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) начал выпускать амнеизак.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} начал выпускать амнеизак.");
         }
 
 
@@ -128,20 +128,20 @@ namespace Padoru.Logger.Events.Internal
         public void OnPlayerOpenGenerator(PlayerAPI player, Scp079Generator generator)
         {
             var room = RoomIdUtils.RoomAtPosition(generator.transform.position).Name;
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) открыл генератор в комнате {room}");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} открыл генератор в комнате {room}");
         }
 
         [PluginEvent(ServerEventType.PlayerCloseGenerator)]
         public void OnPlayerCloseGenerator(PlayerAPI player, Scp079Generator generator)
         {
             var room = RoomIdUtils.RoomAtPosition(generator.transform.position).Name;
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) закрыл генератор в комнате {room}");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} закрыл генератор в комнате {room}");
         }
 
         [PluginEvent(ServerEventType.PlayerInteractScp330)]
         public void OnPlayerInteractScp330(PlayerAPI player)
         {
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()}) применил SCP-330.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} применил SCP-330.");
         }
     }
 }
