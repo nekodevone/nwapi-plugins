@@ -11,6 +11,11 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.Scp049ResurrectBody)]
         public void OnScp049ResurrectBody(PlayerAPI scp049, PlayerAPI target, BasicRagdoll ragdoll)
         {
+            if (!Plugin.Configs.LoggingEvents.Scp049ResurrectBody)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene($"Игрок {scp049.GetInfo()} воскресил {target.GetInfo()}.");
         }
     }

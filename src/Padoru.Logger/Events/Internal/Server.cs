@@ -13,24 +13,44 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.WaitingForPlayers)]
         public void OnWaitingForPlayers()
         {
+            if (!Plugin.Configs.LoggingEvents.WaitingForPlayers)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene("Сервер ожидает игроков");
         }
 
         [PluginEvent(ServerEventType.RoundStart)]
         public void OnRoundStart()
         {
+            if (!Plugin.Configs.LoggingEvents.RoundStart)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene("Раунд начался");
         }
 
         [PluginEvent(ServerEventType.RoundEnd)]
         public void OnRoundEnd(RoundSummary.LeadingTeam leadTeam)
         {
+            if (!Plugin.Configs.LoggingEvents.RoundEnd)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene($"Раунд закончился победой {leadTeam}");
         }
 
         [PluginEvent(ServerEventType.RoundRestart)]
         public void OnRoundRestart()
         {
+            if (!Plugin.Configs.LoggingEvents.RoundRestart)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene("Раунд рестартится");
         }
 
@@ -39,7 +59,7 @@ namespace Padoru.Logger.Events.Internal
             bool result,
             string response)
         {
-            if (commandSender is not CommandSender sender)
+            if (!Plugin.Configs.LoggingEvents.RemoteAdminCommandExecuted || commandSender is not CommandSender sender)
             {
                 return;
             }

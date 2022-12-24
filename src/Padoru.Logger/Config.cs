@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using Padoru.API.Features.Plugins;
+using Padoru.Logger.Structs;
 
 namespace Padoru.Logger
 {
@@ -10,5 +11,8 @@ namespace Padoru.Logger
 		
 		[Description("Токен вебхука")]
 		public string WebhookUrl { get; set; } = string.Empty;
+
+		[Description("События который будут логироваться")]
+		public LoggingEvents LoggingEvents { get; set; } = new();
 	}
 }

@@ -13,13 +13,23 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.Scp914Activate)]
         public void OnScp914Activate(PlayerAPI player)
         {
+            if (!Plugin.Configs.LoggingEvents.Scp914Activate)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene(
-                $"Игрок {player.GetInfo()}) использовал SCP-914. Режим {Scp914Controller.Singleton.Network_knobSetting})");
+                $"Игрок {player.GetInfo()}) использовал SCP-914. Режим {Scp914Controller.Singleton.Network_knobSetting}.");
         }
 
         [PluginEvent(ServerEventType.Scp914KnobChange)]
         public void OnScp914KnobChange(PlayerAPI player)
         {
+            if (!Plugin.Configs.LoggingEvents.Scp914KnobChange)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene(
                 $"Игрок {player.GetInfo()}) переключил режим SCP-914. Предыдущий режим {Scp914Controller.Singleton.Network_knobSetting}.");
         }

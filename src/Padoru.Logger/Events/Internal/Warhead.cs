@@ -11,7 +11,7 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.WarheadStart)]
         public void OnWarheadStart(bool isAutomatic, PlayerAPI player)
         {
-            if (player is null)
+            if (!Plugin.Configs.LoggingEvents.WarheadStart || player is null)
             {
                 return;
             }
@@ -24,7 +24,7 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.WarheadStop)]
         public void OnWarheadStop(PlayerAPI player)
         {
-            if (player is null)
+            if (!Plugin.Configs.LoggingEvents.WarheadStop || player is null)
             {
                 return;
             }
@@ -35,6 +35,11 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.WarheadDetonation)]
         public void OnWarheadDetonation()
         {
+            if (!Plugin.Configs.LoggingEvents.WarheadDetonation)
+            {
+                return;
+            }
+
             Plugin.Sender.AddToQuene("Альфа-Боеголовка была взорвана.");
         }
     }

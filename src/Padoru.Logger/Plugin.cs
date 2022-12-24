@@ -7,6 +7,8 @@ namespace Padoru.Logger
     {
         public static Plugin Instance { get; } = new();
         
+        public static Config Configs => Instance.Config;
+
         public static Sender Sender => Instance._sender;
         
         private Sender _sender;

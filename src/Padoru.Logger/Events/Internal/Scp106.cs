@@ -12,6 +12,11 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.Scp106Stalking)]
         public void OnScp106Stalking(PlayerAPI player, bool activate)
         {
+            if (!Plugin.Configs.LoggingEvents.Scp106Stalking)
+            {
+                return;
+            }
+            
             Plugin.Sender.AddToQuene(
                 $"Игрок {player.GetInfo()} {(activate ? "использовал сталк" : "вышел из сталка")}");
         }
