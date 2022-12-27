@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InventorySystem;
 using MEC;
 using Padoru.API;
@@ -37,7 +38,14 @@ namespace Padoru.Kit.API.Features.Jails
 
             Snapshots[player] = new PlayerSnapshot(player);
 
-            if (!player.RemoteAdminAccess)
+            player.SetRole(RoleTypeId.Tutorial);
+
+            if (player.RemoteAdminAccess)
+            {
+                return;
+            }
+
+            try
             {
                 player.SendBroadcast(
                     $"<color={Color.Red}>Администратор вызвал вас на разборки. Не выходите из сервера.</color>",
@@ -45,8 +53,10 @@ namespace Padoru.Kit.API.Features.Jails
                     shouldClearPrevious: true
                 );
             }
-
-            player.SetRole(RoleTypeId.Tutorial);
+            catch (Exception error)
+            {
+                Log.Error($"Hubert wants us to ignore this error: {error}");
+            }
         }
 
         /// <summary>
