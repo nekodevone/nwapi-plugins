@@ -21,14 +21,14 @@ namespace Padoru.Kit.Events.Internal
         public void OnPlayerLeft(PlayerAPI player)
         {
             Log.Info(
-                $"Player [{player.PlayerId}]  {player.Nickname} ({player.UserId}) left the server. IP: {player.IpAddress}");
+                $"Player [{player.PlayerId}] {player.Nickname} ({player.UserId}) left the server. IP: {player.IpAddress}");
         }
 
         [PluginEvent(ServerEventType.PlayerReport)]
         public void OnPlayerReport(PlayerAPI issuer, PlayerAPI target, string reason)
         {
             Log.Info(
-                $"Player [{issuer.PlayerId}]  {issuer.Nickname} ({issuer.UserId}) reported [{target.PlayerId}]  {target.Nickname} ({target.UserId}): {reason}");
+                $"Player [{issuer.PlayerId}] {issuer.Nickname} ({issuer.UserId}) reported [{target.PlayerId}]  {target.Nickname} ({target.UserId}): {reason}");
 
             Plugin.Reports.Send(issuer, target, reason);
         }
