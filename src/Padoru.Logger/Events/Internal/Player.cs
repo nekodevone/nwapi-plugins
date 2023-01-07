@@ -163,8 +163,8 @@ namespace Padoru.Logger.Events.Internal
         }
 
         [PluginEvent(ServerEventType.PlayerThrowProjectile)]
-        public void OnPlayerThrowProjectile(PlayerAPI player, ThrowableItem item, float forceAmount,
-            float upwardsFactor, Vector3 torque, Vector3 velocity)
+        public void OnPlayerThrowProjectile(PlayerAPI player, ThrowableItem item,
+            ThrowableItem.ProjectileSettings projectileSettings, bool fullForce)
         {
             if (!Plugin.Configs.LoggingEvents.PlayerThrowProjectile)
             {
@@ -182,7 +182,7 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
-            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} начал выпускать амнеизак.");
+            Plugin.Sender.AddToQuene($"Игрок {player.GetInfo()} начал выпускать амнезиак.");
         }
 
 

@@ -9,7 +9,7 @@ namespace Padoru.Logger.Events.Internal
     public class Warhead : IEventHandler
     {
         [PluginEvent(ServerEventType.WarheadStart)]
-        public void OnWarheadStart(bool isAutomatic, PlayerAPI player)
+        public void OnWarheadStart(bool isAutomatic, PlayerAPI player, bool isResumed)
         {
             if (!Plugin.Configs.LoggingEvents.WarheadStart || player is null)
             {
