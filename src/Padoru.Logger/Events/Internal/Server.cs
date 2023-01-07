@@ -4,6 +4,7 @@ using Padoru.API.Features.Plugins;
 using Padoru.Logger.Extensions;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
+using RemoteAdmin;
 using PlayerAPI = PluginAPI.Core.Player;
 
 namespace Padoru.Logger.Events.Internal
@@ -64,8 +65,12 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
+            var admin = sender is PlayerCommandSender
+                ? PlayerAPI.Get(sender)
+                : PluginAPI.Core.Server.Instance;
+
             Plugin.Sender.AddToQuene(
-                $"Администратор {PlayerAPI.Get(sender.SenderId).GetInfo()} использовал команду {command} {arguments.Join(delimiter: " ")}");
+                $"Администратор {admin.GetInfo()} использовал команду {command} {arguments.Join(delimiter: " ")}");
         }
     }
 }
