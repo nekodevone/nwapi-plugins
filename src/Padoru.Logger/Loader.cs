@@ -10,7 +10,7 @@ namespace Padoru.Logger
         public Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("Padoru.Logger", "2022.1224.5", "Логирование событий", "NekoDev Team")]
+        [PluginEntryPoint("Padoru.Logger", "2023.0107.0", "Логирование событий", "NekoDev Team")]
         public void Load()
         {
             Plugin.Instance.Load(this, Config);
