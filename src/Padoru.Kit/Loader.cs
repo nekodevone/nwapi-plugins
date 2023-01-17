@@ -10,7 +10,7 @@ namespace Padoru.Kit
         public Config Config;
         
         [PluginPriority(LoadPriority.High)]
-        [PluginEntryPoint("Padoru.Kit", "2022.1223.0", "Общие утилиты для наших серверов", "NekoDev Team")]
+        [PluginEntryPoint("Padoru.Kit", "2023.0117.0", "Общие утилиты для наших серверов", "NekoDev Team")]
         public void Load()
         {
             Plugin.Instance.Load(this, Config);
