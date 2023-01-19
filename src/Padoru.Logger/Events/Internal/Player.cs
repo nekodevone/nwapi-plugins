@@ -11,8 +11,8 @@ using PlayerRoles;
 using PlayerStatsSystem;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
-using UnityEngine;
 using PlayerAPI = PluginAPI.Core.Player;
+using ServerAPI = PluginAPI.Core.Server;
 
 namespace Padoru.Logger.Events.Internal
 {
@@ -43,12 +43,8 @@ namespace Padoru.Logger.Events.Internal
         [PluginEvent(ServerEventType.PlayerDamage)]
         public void OnPlayerDamage(PlayerAPI target, PlayerAPI attacker, DamageHandlerBase damageHandler)
         {
-            if (!Plugin.Configs.LoggingEvents.PlayerDamage)
-            {
-                return;
-            }
-
-            if (attacker is null || damageHandler is not AttackerDamageHandler attackerDamageHandler)
+            if (!Plugin.Configs.LoggingEvents.PlayerDamage || attacker is null ||
+                damageHandler is not AttackerDamageHandler attackerDamageHandler)
             {
                 return;
             }
@@ -60,11 +56,13 @@ namespace Padoru.Logger.Events.Internal
                 return;
             }
 
-            if (attackerDamageHandler.IsFriendlyFire)
+            if (!ServerAPI.FriendlyFire || target.Role.GetFaction() != attacker.Role.GetFaction())
             {
-                Plugin.Sender.AddToQuene(
-                    $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от союзника {attacker.GetInfo()}.");
+                return;
             }
+
+            Plugin.Sender.AddToQuene(
+                $"Игрок {target.GetInfo()} получил {attackerDamageHandler.Damage} урона от союзника {attacker.GetInfo()}.");
         }
 
         [PluginEvent(ServerEventType.PlayerBanned)]
