@@ -8,8 +8,5 @@ namespace Padoru.Kit
     {
         [Description("Включён ли плагин или нет")]
         public bool IsEnabled { get; set; } = true;
-
-        [Description("Расположение башни туториалов")]
-        public SerializedVector3 TowerPosition { get; set; } = new(130.335f, 994f, 20.113f);
     }
 }

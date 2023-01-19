@@ -52,7 +52,6 @@ namespace Padoru.Kit.Events.Internal
 
                 // Выдадим очень много HP вместо годмода. Эффект +/- одинаковый, только годмод в 12.0 может не убраться после форскласса
                 player.Health = ushort.MaxValue;
-                player.Position = Plugin.Configs.TowerPosition.Get;
             });
         }
     }
