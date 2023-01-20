@@ -1,38 +1,49 @@
 ﻿namespace Padoru.OfflineBans.Commands
 {
     using CommandSystem;
+    using Padoru.OfflineBans.Classes;
     using System;
     using System.IO;
     using System.Linq;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
-    public class Delete : RecieverParent
+    public class Delete : ParentCommand
     {
-        public override string Command { get; } = "ofban del";
+        public Delete() => LoadGeneratedCommands();
 
-        public override string[] Aliases { get; } = new string[] { "ofb del", "offban del" };
+        public override string Command { get; } = "del";
 
-        public override string Description { get; } = "Удаляет офбан.";
+        public override string[] Aliases { get; } = new string[] { "delete" };
 
-        public override bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        public override string Description { get; } = "Удаляет офбан";
+
+        public override void LoadGeneratedCommands() { }
+
+        protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            if (!((CommandSender)sender).CheckPermission(PlayerPermissions.BanningUpToDay))
+            {
+                response = "Недостаточно прав";
+                return false;
+            }
+
             string clearString = string.Join(" ", arguments.Array);
-            if (Regex[0].IsMatch(clearString) || Regex[1].IsMatch(clearString))
+            if (Tools.Regex[2].IsMatch(clearString) || Tools.Regex[3].IsMatch(clearString))
             {
                 response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
                 return false;
             }
 
-            if (!Directory.Exists(filepath))
+            if (!Directory.Exists(Tools.filepath))
             {
-                Directory.CreateDirectory(filepath);
+                Directory.CreateDirectory(Tools.filepath);
             }
 
             string id = arguments.ElementAt(0);
             try
             {
-                File.Delete(filepath + $"\\{id}.json");
+                File.Delete(Tools.filepath + $"\\{id}.json");
                 response = "Ожидаемый бан удалён";
                 return true;
             }

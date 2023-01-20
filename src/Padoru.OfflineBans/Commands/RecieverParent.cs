@@ -1,151 +1,31 @@
 ﻿namespace Padoru.OfflineBans.Commands
 {
     using CommandSystem;
-    using Padoru.OfflineBans.Classes;
-    using PluginAPI.Helpers;
     using System;
-    using System.Text.RegularExpressions;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
-    public abstract class RecieverParent : ICommand
+    public class RecieverParent : ParentCommand
     {
-        public abstract string Command { get; }
+        public RecieverParent() => LoadGeneratedCommands();
 
-        public abstract string[] Aliases { get; }
+        public override string Command { get; } = "ofban";
 
-        public abstract string Description { get; }
+        public override string[] Aliases { get; } = new string[] { "ofb", "of" };
 
-        protected Regex[] Regex { get; } = { new Regex(@"/^\d{17}@steam\s\d*.\s.*/"),
-                                          new Regex(@"/^\d{18}@discord\s\d*.\s.*/")};
+        public override string Description { get; } = "Основа для офбанов";
 
-        protected Regex[] RegexDel { get; } = { new Regex(@"/^\d{18}@discord\s.*/"),
-                                             new Regex(@"/^\d{17}@steam\s.*/")};
-
-        protected static string filepath { get; } = WantedPath.filepath;
-
-        public abstract bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response);
-
-        protected static (long, string) GetBanTime(string banstring)
+        public override void LoadGeneratedCommands()
         {
-            long bantime;
-            string postfix;
-
-            bantime = GetFullTimeSeconds(banstring);
-            postfix = PostfixCreator(bantime);
-
-            return (bantime, postfix);
+            RegisterCommand(new Add());
+            RegisterCommand(new Modify());
+            RegisterCommand(new Delete());
         }
 
-        private static string PostfixCreator(long bantime)
+        protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            int k = 0;
-            string result = "";
-
-            if (bantime >= 311004000)
-            {
-                while (bantime > 2592000)
-                {
-                    bantime /= 311004000;
-                    k++;
-                }
-
-                result += k + " г. ";
-                k = 0;
-            }
-
-            if (bantime >= 2592000)
-            {
-                while (bantime > 86400)
-                {
-                    bantime /= 311004000;
-                    k++;
-                }
-
-                result += k + " мес. ";
-                k = 0;
-            }
-
-            if (bantime >= 86400)
-            {
-                while (bantime > 3600)
-                {
-                    bantime /= 86400;
-                    k++;
-                }
-
-                result += k + " дн. ";
-                k = 0;
-            }
-
-            if (bantime >= 3600)
-            {
-                while (bantime > 60)
-                {
-                    bantime /= 3600;
-                    k++;
-                }
-
-                result += k + " ч. ";
-                k = 0;
-            }
-
-            if (bantime >= 60)
-            {
-                while (bantime > 1)
-                {
-                    bantime /= 60;
-                    k++;
-                }
-
-                result += k + " мин. ";
-            }
-
-            return result;
-        }
-
-        private static long GetFullTimeSeconds(string banstring)
-        {
-            long bantime = 0, k;
-            string substring;
-            int previousLetter = 0;
-
-            foreach (char c in banstring)
-            {
-                if (!char.IsDigit(c))
-                {
-                    k = GetCoeff(c);//добавить обработку 0
-                    substring = banstring.Substring(previousLetter, banstring.IndexOf(c));
-                    bantime += k * long.Parse(substring);
-                    previousLetter = banstring.IndexOf(c) + 1;
-                }
-            }
-
-            return bantime;
-        }
-
-        private static long GetCoeff(char c)
-        {
-            switch (c)
-            {
-                case 'm':
-                    return 60L;
-
-                case 'h':
-                    return 3600L;
-
-                case 'D':
-                    return 86400L;
-
-                case 'M':
-                    return 2592000L;
-
-                case 'Y':
-                    return 31104000L;
-
-                default:
-                    return 0;
-            }
+            response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
+            return false;
         }
     }
 }

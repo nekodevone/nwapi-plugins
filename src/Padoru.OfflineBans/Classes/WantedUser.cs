@@ -18,7 +18,7 @@
 
         public static void Ban(PlayerAPI player)
         {
-            string path = WantedPath.filepath + $"\\{player.UserId}.json";
+            string path = Tools.filepath + $"\\{player.UserId}.json";
             StreamReader r = new StreamReader(path);
             string json = r.ReadToEnd();
 
