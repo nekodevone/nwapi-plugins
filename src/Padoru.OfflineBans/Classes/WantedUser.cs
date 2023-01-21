@@ -16,13 +16,16 @@
             Reason = reason;
         }
 
+        public WantedUser() { }
+
         public static void Ban(PlayerAPI player)
         {
             string path = Tools.filepath + $"\\{player.UserId}.json";
             StreamReader r = new StreamReader(path);
             string json = r.ReadToEnd();
+            r.Close();
 
-            WantedUser user = Newtonsoft.Json.JsonConvert.DeserializeObject<WantedUser>(json);
+            WantedUser user = Utf8Json.JsonSerializer.Deserialize<WantedUser>(json);
             player.Ban(user.Reason, user.BanTime);
             File.Delete(path);
         }

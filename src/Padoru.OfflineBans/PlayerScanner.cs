@@ -12,7 +12,6 @@
         [PluginEvent(ServerEventType.PlayerJoined)]
         public void OnPlayerJoined(PlayerAPI player)
         {
-
             if (File.Exists(Tools.filepath + $"\\{player.UserId}.json"))
             {
                 WantedUser.Ban(player);

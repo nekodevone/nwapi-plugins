@@ -1,13 +1,11 @@
 ﻿namespace Padoru.OfflineBans.Commands
 {
     using CommandSystem;
-    using Newtonsoft.Json;
     using Padoru.OffBans.Classes;
     using Padoru.OfflineBans.Classes;
     using System;
     using System.IO;
     using System.Linq;
-    using Formatting = Newtonsoft.Json.Formatting;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
@@ -46,8 +44,13 @@
             string id = arguments.ElementAt(0);
             string reason = string.Join(" ", arguments.Skip(2).ToArray());
             (long, string) bantime = Tools.GetBanTime(arguments.ElementAt(1));
+            if (bantime.Item1 == -1L)
+            {
+                response = "Ошибка в указании времени";
+                return false;
+            }
             WantedUser user = new WantedUser(id, bantime.Item1, reason);
-            string json = JsonConvert.SerializeObject(user, Formatting.Indented);
+            string json = Utf8Json.JsonSerializer.ToJsonString(user);
             File.WriteAllText(Tools.filepath + $"\\{id}.json", json);
 
             response = $"Бан успешно изменён:\nID нарушителя: {id}\nДлительность: {bantime.Item2}.\nПричина: {reason}";

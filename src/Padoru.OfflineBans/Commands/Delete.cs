@@ -29,7 +29,7 @@
             }
 
             string clearString = string.Join(" ", arguments.Array);
-            if (Tools.Regex[2].IsMatch(clearString) || Tools.Regex[3].IsMatch(clearString))
+            if (Tools.RegexDel[0].IsMatch(clearString) || Tools.RegexDel[1].IsMatch(clearString))
             {
                 response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
                 return false;
