@@ -1,6 +1,9 @@
 ﻿using Padoru.API.Features.Plugins;
+using Padoru.OfflineBans.Classes;
+using Padoru.OfflineBans.Events;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
+using System.IO;
 
 namespace Padoru.OfflineBans
 {
@@ -14,6 +17,11 @@ namespace Padoru.OfflineBans
         public void Load()
         {
             Plugin.Instance.Load(this, Config);
+
+            if (!Directory.Exists(Tools.FolderPath))
+            {
+                Directory.CreateDirectory(Tools.FolderPath);
+            }
         }
     }
 }

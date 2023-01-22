@@ -1,26 +1,22 @@
-﻿namespace Padoru.OfflineBans.Commands
+﻿using CommandSystem;
+using Padoru.OfflineBans.Classes;
+using System;
+using System.IO;
+using System.Linq;
+
+namespace Padoru.OfflineBans.Commands
 {
-    using CommandSystem;
-    using Padoru.OfflineBans.Classes;
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    [CommandHandler(typeof(GameConsoleCommandHandler))]
-    public class Delete : ParentCommand
+    public class Delete : ICommand
     {
-        public Delete() => LoadGeneratedCommands();
+        public string Command { get; } = "del";
 
-        public override string Command { get; } = "del";
+        public string[] Aliases { get; } = new string[] { "delete" };
 
-        public override string[] Aliases { get; } = new string[] { "delete" };
+        public string Description { get; } = "Удаляет офбан";
 
-        public override string Description { get; } = "Удаляет офбан";
+        public void LoadGeneratedCommands() { }
 
-        public override void LoadGeneratedCommands() { }
-
-        protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (!((CommandSender)sender).CheckPermission(PlayerPermissions.BanningUpToDay))
             {
@@ -35,15 +31,10 @@
                 return false;
             }
 
-            if (!Directory.Exists(Tools.filepath))
-            {
-                Directory.CreateDirectory(Tools.filepath);
-            }
-
             string id = arguments.ElementAt(0);
             try
             {
-                File.Delete(Tools.filepath + $"\\{id}.json");
+                File.Delete(Tools.FolderPath + $"\\{id}.json");
                 response = "Ожидаемый бан удалён";
                 return true;
             }

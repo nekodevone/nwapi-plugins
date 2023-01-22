@@ -1,8 +1,8 @@
-﻿namespace Padoru.OfflineBans.Commands
-{
-    using CommandSystem;
-    using System;
+﻿using CommandSystem;
+using System;
 
+namespace Padoru.OfflineBans.Commands
+{
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
     public class RecieverParent : ParentCommand

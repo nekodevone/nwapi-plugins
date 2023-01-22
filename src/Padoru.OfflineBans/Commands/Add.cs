@@ -1,25 +1,20 @@
-﻿namespace Padoru.OfflineBans.Commands
+﻿using CommandSystem;
+using Padoru.OfflineBans.Classes;
+using System;
+using System.IO;
+using System.Linq;
+
+namespace Padoru.OfflineBans.Commands
 {
-    using CommandSystem;
-    using Padoru.OffBans.Classes;
-    using Padoru.OfflineBans.Classes;
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    public class Add : ParentCommand
+    public class Add : ICommand
     {
-        public Add() => LoadGeneratedCommands();
+        public string Command { get; } = "add";
 
-        public override string Command { get; } = "add";
+        public string[] Aliases { get; }
 
-        public override string[] Aliases { get; }
+        public string Description { get; } = "Принимает офбан и заносит нарушителя и нужную информацию в нужное место.";
 
-        public override string Description { get; } = "Принимает офбан и заносит нарушителя и нужную информацию в нужное место.";
-
-        public override void LoadGeneratedCommands() { }
-
-        protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (!((CommandSender)sender).CheckPermission(PlayerPermissions.BanningUpToDay))
             {
@@ -34,23 +29,25 @@
                 return false;
             }
 
-            if (!Directory.Exists(Tools.filepath))
+            if (File.Exists(Tools.FolderPath + $"{arguments.ElementAt(0)}.json"))
             {
-                Directory.CreateDirectory(Tools.filepath);
+                response = "Пользователь с таким ID уже находится в розыске. Используй modify или del";
+                return false;
             }
 
-            string id = arguments.ElementAt(0);
-            string reason = string.Join(" ", arguments.Skip(2).ToArray());
-            (long, string) bantime = Tools.GetBanTime(arguments.ElementAt(1));
-            if (bantime.Item1 == -1L)
+            if (!WantedUser.TimeFormatCheck(arguments.ElementAt(1)))
             {
                 response = "Ошибка в указании времени";
                 return false;
             }
+
+            string id = arguments.ElementAt(0);
+            string reason = string.Join(" ", arguments.Skip(2).ToArray());
+            (long, string) bantime = WantedUser.GetBanTime(arguments.ElementAt(1));
+
             WantedUser user = new WantedUser(id, bantime.Item1, reason);
             string json = Utf8Json.JsonSerializer.ToJsonString(user);
-            //string json = JsonConvert.SerializeObject(user, Formatting.Indented);
-            File.WriteAllText(Tools.filepath + $"\\{id}.json", json);
+            File.WriteAllText(Tools.FolderPath + $"\\{id}.json", json);
 
             response = $"Бан успешно сохранён:\nID нарушителя: {id}\nДлительность: {bantime.Item2}\nПричина: {reason}";
             return false;

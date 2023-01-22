@@ -5,12 +5,7 @@
 		<RootNamespace>Padoru.OfflineBans</RootNamespace>
 		<AssemblyName>Padoru.OfflineBans</AssemblyName>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Reference Include="System" />
-		<Reference Include="System.Net.Http" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<ProjectReference Include="..\Padoru.Lib\Padoru.Lib.csproj" />
 	</ItemGroup>
