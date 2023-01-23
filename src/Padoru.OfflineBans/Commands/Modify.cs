@@ -22,28 +22,25 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            string clearString = string.Join(" ", arguments.Array);
-            if (Tools.Regex[0].IsMatch(clearString) || Tools.Regex[1].IsMatch(clearString))
+            if (arguments.Count < 3)
             {
                 response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
                 return false;
             }
 
-            if (!WantedUser.TimeFormatCheck(arguments.ElementAt(1)))
+            if (!Tools.IsIdValid(arguments.ElementAt(0)))
             {
-                response = "Ошибка в указании времени";
+                response = "Неправильный ID игрока";
                 return false;
             }
 
             string id = arguments.ElementAt(0);
-            string reason = string.Join(" ", arguments.Skip(2).ToArray());
+            string reason = string.Join(" ", arguments.Skip(2));
             (long, string) bantime = WantedUser.GetBanTime(arguments.ElementAt(1));
 
-            WantedUser user = new WantedUser(id, bantime.Item1, reason);
-            string json = Utf8Json.JsonSerializer.ToJsonString(user);
-            File.WriteAllText(Tools.FolderPath + $"\\{id}.json", json);
+            WantedUser.Add(id, bantime.Item1, reason);
 
-            response = $"Бан успешно сохранён:\nID нарушителя: {id}\nДлительность: {bantime.Item2}\nПричина: {reason}";
+            response = $"Бан успешно изменён:\nID нарушителя: {id}\nДлительность: {bantime.Item2}\nПричина: {reason}";
             return false;
         }
     }

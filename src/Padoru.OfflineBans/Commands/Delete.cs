@@ -24,25 +24,29 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            string clearString = string.Join(" ", arguments.Array);
-            if (Tools.RegexDel[0].IsMatch(clearString) || Tools.RegexDel[1].IsMatch(clearString))
+            if (arguments.Count < 1)
             {
                 response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
                 return false;
             }
 
-            string id = arguments.ElementAt(0);
-            try
+            if (!Tools.IsIdValid(arguments.ElementAt(0)))
             {
-                File.Delete(Tools.FolderPath + $"\\{id}.json");
-                response = "Ожидаемый бан удалён";
-                return true;
+                response = "Неправильный ID игрока";
+                return false;
             }
-            catch (Exception e)
+
+            string id = arguments.ElementAt(0);
+
+            if (!WantedUser.Has(id))
             {
                 response = "Бан не найден";
                 return false;
             }
+
+            File.Delete(Tools.FolderPath + $"\\{id}.json");
+            response = "Ожидаемый бан удалён";
+            return true;
         }
     }
 }

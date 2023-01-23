@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using static BanHandler;
 using PlayerAPI = PluginAPI.Core.Player;
 
 namespace Padoru.OfflineBans.Classes
@@ -23,6 +24,10 @@ namespace Padoru.OfflineBans.Classes
 
         public WantedUser() { }
 
+        /// <summary>
+        /// Банит игрока на срок и с причиной из json-файла, после чего удаляет этот файл.
+        /// </summary>
+        /// <param name="player">Игрок.</param>
         public static void Ban(PlayerAPI player)
         {
             string path = Tools.FolderPath + $"\\{player.UserId}.json";
@@ -33,6 +38,39 @@ namespace Padoru.OfflineBans.Classes
             File.Delete(path);
         }
 
+        /// <summary>
+        /// Проверяет наличие json-файла с айди игрока в папке розыска.
+        /// </summary>
+        /// <param name="userId">Айди игрока.</param>
+        /// <returns>true если файл существует.</returns>
+        public static bool Has(string userId)
+        {
+            if (File.Exists(Path.Combine(Tools.FolderPath, $"{userId}.json")))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// В папке розыска создает json-файл розыска с именем-айди игрока и сериализует туда класс WantedUser.
+        /// </summary>
+        /// <param name="userId">Айди игрока.</param>
+        /// <param name="time">Срок бана.</param>
+        /// <param name="reason">Причина бана.</param>
+        public static void Add(string userId, long time, string reason)
+        {
+            WantedUser user = new WantedUser(userId, time, reason);
+            string json = Utf8Json.JsonSerializer.ToJsonString(user);
+            File.WriteAllText(Tools.FolderPath + $"\\{userId}.json", json);
+        }
+
+        /// <summary>
+        /// Проверяет строку с временем бана на соответствие формату.
+        /// </summary>
+        /// <param name="bantime">Время бана.</param>
+        /// <returns>true если время бана записано в читаемом формате.</returns>
         public static bool TimeFormatCheck(string bantime)
         {
             int previousLetter = -1, currentChar = 0;
@@ -69,6 +107,11 @@ namespace Padoru.OfflineBans.Classes
             return true;
         }
 
+        /// <summary>
+        /// Переводит строку со сроком бана в читаемый для программы формат и на русский язык.
+        /// </summary>
+        /// <param name="banstring">Строка со сроком бана</param>
+        /// <returns>Длительность бана в секундах и строку с временем бана на русском.</returns>
         public static (long, string) GetBanTime(string banstring)
         {
             long bantime;
@@ -80,6 +123,11 @@ namespace Padoru.OfflineBans.Classes
             return (bantime, postfix);
         }
 
+        /// <summary>
+        /// Создаёт строку со сроком бана на русском.
+        /// </summary>
+        /// <param name="bantime">Срок бана в секундах.</param>
+        /// <returns>Русскую строку :loh:</returns>
         private static string PostfixCreator(long bantime)
         {
             string result = bantime + "сек.";
@@ -89,6 +137,11 @@ namespace Padoru.OfflineBans.Classes
             return result;
         }
 
+        /// <summary>
+        /// Переводит строку со сроком бана в секунды.
+        /// </summary>
+        /// <param name="banstring">Строка со сроком бана.</param>
+        /// <returns>Срок бана в секундах.</returns>
         private static long GetFullTimeSeconds(string banstring)
         {
             long bantime = 0, k;
@@ -110,6 +163,11 @@ namespace Padoru.OfflineBans.Classes
             return bantime;
         }
 
+        /// <summary>
+        /// Принимает единицу измерения времени и преващает её в секунды.
+        /// </summary>
+        /// <param name="c">Символ с единицей измерения.</param>
+        /// <returns>Количество секунд в единице времени.</returns>
         private static long GetCoeff(char c)
         {
             switch (c)

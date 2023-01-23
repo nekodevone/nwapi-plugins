@@ -17,11 +17,6 @@ namespace Padoru.OfflineBans
         public void Load()
         {
             Plugin.Instance.Load(this, Config);
-
-            if (!Directory.Exists(Tools.FolderPath))
-            {
-                Directory.CreateDirectory(Tools.FolderPath);
-            }
         }
     }
 }

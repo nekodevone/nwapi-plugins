@@ -1,5 +1,7 @@
 ﻿using Padoru.API.Features.Plugins;
+using Padoru.OfflineBans.Classes;
 using PluginAPI.Core;
+using System.IO;
 
 namespace Padoru.OfflineBans
 {
@@ -12,6 +14,11 @@ namespace Padoru.OfflineBans
         protected override void OnLoaded()
         {
             Log.Info("Hurray, PadoruKit is loaded!");
+
+            if (!Directory.Exists(Tools.FolderPath))
+            {
+                Directory.CreateDirectory(Tools.FolderPath);
+            }
         }
     }
 }
