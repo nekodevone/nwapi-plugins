@@ -1,9 +1,6 @@
 ﻿using Padoru.API.Features.Plugins;
-using Padoru.OfflineBans.Classes;
-using Padoru.OfflineBans.Events;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
-using System.IO;
 
 namespace Padoru.OfflineBans
 {

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using static BanHandler;
 using PlayerAPI = PluginAPI.Core.Player;
 
 namespace Padoru.OfflineBans.Classes
@@ -30,7 +29,7 @@ namespace Padoru.OfflineBans.Classes
         /// <param name="player">Игрок.</param>
         public static void Ban(PlayerAPI player)
         {
-            string path = Tools.FolderPath + $"\\{player.UserId}.json";
+            string path = Tools.GetPath(player.UserId);
             string json = File.ReadAllText(path);
 
             WantedUser user = Utf8Json.JsonSerializer.Deserialize<WantedUser>(json);
@@ -45,12 +44,7 @@ namespace Padoru.OfflineBans.Classes
         /// <returns>true если файл существует.</returns>
         public static bool Has(string userId)
         {
-            if (File.Exists(Path.Combine(Tools.FolderPath, $"{userId}.json")))
-            {
-                return true;
-            }
-
-            return false;
+            return File.Exists(Tools.GetPath(userId));
         }
 
         /// <summary>
@@ -63,7 +57,7 @@ namespace Padoru.OfflineBans.Classes
         {
             WantedUser user = new WantedUser(userId, time, reason);
             string json = Utf8Json.JsonSerializer.ToJsonString(user);
-            File.WriteAllText(Tools.FolderPath + $"\\{userId}.json", json);
+            File.WriteAllText(Tools.GetPath(userId), json);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
-using Padoru.API.Features.Plugins;
-using Padoru.API.Structs;
+﻿using Padoru.API.Features.Plugins;
+using System.ComponentModel;
 
 namespace Padoru.OfflineBans
 {

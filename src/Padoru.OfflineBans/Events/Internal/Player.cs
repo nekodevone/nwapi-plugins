@@ -2,7 +2,6 @@
 using Padoru.OfflineBans.Classes;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
-using System.IO;
 using PlayerAPI = PluginAPI.Core.Player;
 
 namespace Padoru.OfflineBans.Events.Internal
@@ -12,7 +11,7 @@ namespace Padoru.OfflineBans.Events.Internal
         [PluginEvent(ServerEventType.PlayerJoined)]
         public void OnPlayerJoined(PlayerAPI player)
         {
-            if (File.Exists(Tools.FolderPath + $"\\{player.UserId}.json"))
+            if (WantedUser.Has(player.UserId))
             {
                 WantedUser.Ban(player);
             }

@@ -14,8 +14,6 @@ namespace Padoru.OfflineBans.Commands
 
         public string Description { get; } = "Удаляет офбан";
 
-        public void LoadGeneratedCommands() { }
-
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (!((CommandSender)sender).CheckPermission(PlayerPermissions.BanningUpToDay))
@@ -26,17 +24,17 @@ namespace Padoru.OfflineBans.Commands
 
             if (arguments.Count < 1)
             {
-                response = "Формат команды:\nofban (add/modify/del) (айди нарушителя) (срок) (причина)";
-                return false;
-            }
-
-            if (!Tools.IsIdValid(arguments.ElementAt(0)))
-            {
-                response = "Неправильный ID игрока";
+                response = "Формат команды:\nofban del (айди нарушителя)";
                 return false;
             }
 
             string id = arguments.ElementAt(0);
+
+            if (!Tools.IsIdValid(id))
+            {
+                response = "Неправильный ID игрока";
+                return false;
+            }
 
             if (!WantedUser.Has(id))
             {
@@ -44,7 +42,7 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            File.Delete(Tools.FolderPath + $"\\{id}.json");
+            File.Delete(Tools.GetPath(id));
             response = "Ожидаемый бан удалён";
             return true;
         }
