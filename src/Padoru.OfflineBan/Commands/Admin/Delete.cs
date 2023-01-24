@@ -1,18 +1,18 @@
-﻿using CommandSystem;
-using Padoru.OfflineBans.Classes;
-using System;
-using System.IO;
+﻿using System;
 using System.Linq;
+using CommandSystem;
+using Padoru.OfflineBan.Structs;
+using Padoru.OfflineBan.Utils;
 
-namespace Padoru.OfflineBans.Commands
+namespace Padoru.OfflineBan.Commands.Admin
 {
     public class Delete : ICommand
     {
-        public string Command { get; } = "del";
+        public string Command => "delete";
 
-        public string[] Aliases { get; } = new string[] { "delete" };
+        public string[] Aliases { get; } = { "del" };
 
-        public string Description { get; } = "Удаляет офбан";
+        public string Description => "Удаляет офбан";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
@@ -24,11 +24,11 @@ namespace Padoru.OfflineBans.Commands
 
             if (arguments.Count < 1)
             {
-                response = "Формат команды:\nofban del (айди нарушителя)";
+                response = "Формат команды:\nofban delete (айди нарушителя)";
                 return false;
             }
 
-            string id = arguments.ElementAt(0);
+            var id = arguments.ElementAt(0);
 
             if (!Tools.IsIdValid(id))
             {
@@ -36,13 +36,14 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            if (!WantedUser.Has(id))
+            if (!WantedUser.TryGet(id, out var wantedUser))
             {
-                response = "Бан не найден";
+                response = "Игрок не ожидает бана";
                 return false;
             }
 
-            File.Delete(Tools.GetPath(id));
+            wantedUser.Delete();
+
             response = "Ожидаемый бан удалён";
             return true;
         }

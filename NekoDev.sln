@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Padoru.API", "src\Padoru.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Padoru.Logger", "src\Padoru.Logger\Padoru.Logger.csproj", "{6CE270D5-0757-4408-9F37-7D6E6C868587}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Padoru.OfflineBans", "src\Padoru.OfflineBans\Padoru.OfflineBans.csproj", "{D1795C84-4554-4C53-8857-547D58A0A4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Padoru.OfflineBan", "src\Padoru.OfflineBan\Padoru.OfflineBan.csproj", "{D1795C84-4554-4C53-8857-547D58A0A4A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

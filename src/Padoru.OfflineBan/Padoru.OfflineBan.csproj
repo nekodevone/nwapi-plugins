@@ -2,8 +2,8 @@
 	<PropertyGroup Label="Project">
 		<ProjectGuid>{d1795c84-4554-4c53-8857-547d58a0a4a0}</ProjectGuid>
 		<OutputType>Library</OutputType>
-		<RootNamespace>Padoru.OfflineBans</RootNamespace>
-		<AssemblyName>Padoru.OfflineBans</AssemblyName>
+		<RootNamespace>Padoru.OfflineBan</RootNamespace>
+		<AssemblyName>Padoru.OfflineBan</AssemblyName>
 	</PropertyGroup>
 	
 	<ItemGroup>

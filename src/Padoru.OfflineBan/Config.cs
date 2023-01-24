@@ -1,7 +1,7 @@
 ﻿using Padoru.API.Features.Plugins;
 using System.ComponentModel;
 
-namespace Padoru.OfflineBans
+namespace Padoru.OfflineBan
 {
     public sealed class Config : IConfig
     {

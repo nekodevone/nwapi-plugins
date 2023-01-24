@@ -1,17 +1,19 @@
-﻿using CommandSystem;
-using Padoru.OfflineBans.Classes;
-using System;
+﻿using System;
 using System.Linq;
+using CommandSystem;
+using Padoru.OfflineBan.Structs;
+using Padoru.OfflineBan.Utils;
+using Padoru.OfflineBan.Extensions;
 
-namespace Padoru.OfflineBans.Commands
+namespace Padoru.OfflineBan.Commands.Admin
 {
     public class Add : ICommand
     {
-        public string Command { get; } = "add";
+        public string Command => "add";
 
         public string[] Aliases { get; } = Array.Empty<string>();
 
-        public string Description { get; } = "Принимает офбан и заносит нарушителя и нужную информацию в нужное место.";
+        public string Description => "Принимает офбан и заносит нарушителя и нужную информацию в нужное место.";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
@@ -27,7 +29,7 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            string id = arguments.ElementAt(0);
+            var id = arguments.ElementAt(0);
 
             if (!Tools.IsIdValid(id))
             {
@@ -41,20 +43,19 @@ namespace Padoru.OfflineBans.Commands
                 return false;
             }
 
-            string bantimestring = arguments.ElementAt(1);
+            var rawTime = arguments.ElementAt(1);
 
-            if (!WantedUser.TimeFormatCheck(bantimestring))
+            if (!rawTime.RelativeTimeToSeconds(out var time))
             {
                 response = "Ошибка в указании времени";
                 return false;
             }
 
-            string reason = string.Join(" ", arguments.Skip(2));
-            (long, string) bantime = WantedUser.GetBanTime(bantimestring);
+            var reason = string.Join(" ", arguments.Skip(2));
 
-            WantedUser.Add(id, bantime.Item1, reason);
+            WantedUser.Add(id, time, reason);
 
-            response = $"Бан успешно сохранён:\nID нарушителя: {id}\nДлительность: {bantime.Item2}\nПричина: {reason}";
+            response = $"Бан успешно сохранён:\nID нарушителя: {id}\nДлительность: {time}\nПричина: {reason}";
             return false;
         }
     }
