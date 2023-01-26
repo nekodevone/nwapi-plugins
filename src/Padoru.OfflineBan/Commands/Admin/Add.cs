@@ -45,7 +45,7 @@ namespace Padoru.OfflineBan.Commands.Admin
 
             var rawTime = arguments.ElementAt(1);
 
-            if (!rawTime.RelativeTimeToSeconds(out var time))
+            if (!rawTime.RelativeTimeToSeconds(":" ,out var time))
             {
                 response = "Ошибка в указании времени";
                 return false;
